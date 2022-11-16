@@ -1,8 +1,9 @@
 import time
 from turtle import Screen
-from snake import Snake
+
 from food import Food
 from scoreboard import Scoreboard
+from snake import Snake
 
 screen = Screen()
 screen.setup(width=600, height=600)
@@ -38,14 +39,11 @@ while game_is_on:
         scoreboard.game_over()
 
     # Detect collision with tail
-    for segment in snake.segments:
-        # escaping the head from colliding with itself
-        if segment == snake.head:
-            pass
-        elif snake.head.distance(segment) < 10:
+    for segment in snake.segments[1:]:  # escaping the head from colliding with itself by slicing the Tuple
+        if snake.head.distance(segment) < 10:
             game_is_on = False
             scoreboard.game_over()
     # if the head collides with any segment in the tail:
-        # trigger game over
+    # trigger game over
 
 screen.exitonclick()
